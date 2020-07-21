@@ -49,12 +49,18 @@ function App (props) {
       >
         <Todo
           name='Eat'
+          done={false}
+          id='todo-0'
         />
         <Todo
           name='Sleep'
+          done={false}
+          id='todo-1'
         />
         <Todo
           name='Repeat'
+          done={false}
+          id='todo-2'
         />
       </ul>
     </div>
