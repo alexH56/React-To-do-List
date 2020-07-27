@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { nanoid } from 'nanoid';
 import Todo from './components/Todo';
 import Form from './components/Form';
 import FilterButton from './components/FilterButton';
 
 function App (props) {
-  const taskList = props.tasks.map(task => (
+  const [tasks, setTasks] = useState(props.tasks);
+
+  const taskList = tasks.map(task => (
     <Todo
       key={task.id}
       id={task.id}
@@ -14,8 +17,12 @@ function App (props) {
   ));
 
   const addTask = (name) => {
-    console.log(name);
+    const newTask = { id: `todo-${nanoid()}`, name: name, done: false };
+    setTasks([...tasks, newTask]);
   };
+
+  const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task';
+  const headingText = `${taskList.length} ${tasksNoun} remaining`;
 
   return (
     <div className='todoapp stack-large'>
@@ -30,10 +37,10 @@ function App (props) {
       </div>
 
       <h2 id='list-heading'>
-        3 tasks remaining
+        {headingText}
       </h2>
       <ul
-        role='list'
+        // role='list'
         className='todo-list stack-large stack-exception'
         aria-labelledby='list-heading'
       >
